@@ -48,38 +48,7 @@ services:
     ports:
       - "5432:5432"
 
-  # airflow-init:
-  #   << : *airflow-common
-  #   container_name: airflow_init
-  #   entrypoint: /bin/bash
-  #   command:
-  #     - -c
-  #     - airflow users list || ( airflow db init &&
-  #       airflow users create
-  #         --role Admin
-  #         --username airflow
-  #         --password airflow
-  #         --email airflow@airflow.com
-  #         --firstname airflow
-  #         --lastname airflow )
-  #   restart: on-failure
 
-  # airflow-webserver:
-  #   << : *airflow-common
-  #   command: airflow webserver
-  #   ports:
-  #     - 8080:8080
-  #   container_name: airflow_webserver
-  #   restart: always
-
-  # airflow-scheduler:
-  #   << : *airflow-common
-  #   command: airflow scheduler
-  #   container_name: airflow_scheduler
-  #   restart: always
-
-  # hook in case we need to add init behavior
-  # every root service (no depends_on) should depend on init
   init:
     image: airbyte/init:${VERSION}
     logging: *default-logging
@@ -265,7 +234,6 @@ services:
     depends_on:
       bootloader:
         condition: service_completed_successfully
-    
 
 
   webapp:
@@ -395,20 +363,6 @@ services:
       - airbyte-api-server
     
 
-  # postgres:
-  #   container_name: postgres
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_PASSWORD: pass
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_DB: postgres
-  #   ports:
-  #     - '5432:5432'
-  #   volumes:
-  #     - ./sql:/docker-entrypoint-initdb.d
-  #   networks:
-  #     - airbyte_public
-
   master:
     container_name: citus
     image: "citusdata/citus:12.1.1"
@@ -420,7 +374,6 @@ services:
       PGUSER: "${POSTGRES_USER:-postgres}"
       PGPASSWORD: "${POSTGRES_PASSWORD}"
       POSTGRES_HOST_AUTH_METHOD: "${POSTGRES_HOST_AUTH_METHOD:-trust}"
-
     
 volumes:
   workspace:
