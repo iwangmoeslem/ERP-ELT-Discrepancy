@@ -1,0 +1,28 @@
+[0m23:20:26.580455 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B0A70AFF90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B0A6BC11D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B0A6E89650>]}
+
+
+============================== 23:20:26.584122 | 9e86abbb-9857-49fb-ba33-3292af65f8bd ==============================
+[0m23:20:26.584122 [info ] [MainThread]: Running with dbt=1.7.1
+[0m23:20:26.584122 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'fail_fast': 'False', 'log_path': 'logs', 'version_check': 'True', 'profiles_dir': 'D:\\Altera Academy\\Tugas\\Teknikal\\Unit 3\\Capstone\\capstone-alta-data-main\\docker-dep\\dbt-profiles', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:20:26.584122 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\Altera Academy\Tugas\Teknikal\Unit 3\Capstone\capstone-alta-data-main\docker-dep\dbt-profiles\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m23:20:26.584122 [debug] [MainThread]: Command `dbt run` failed at 23:20:26.584122 after 0.06 seconds
+[0m23:20:26.584122 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B0A68A43D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B0A6B9BE10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B0A6B98790>]}
+[0m23:20:26.584122 [debug] [MainThread]: Flushing usage events
+[0m14:26:44.220651 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000238B537C110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000238B5046890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000238B5034E50>]}
+
+
+============================== 14:26:44.236274 | e31b5df9-85f7-430f-880b-58474ac59a62 ==============================
+[0m14:26:44.236274 [info ] [MainThread]: Running with dbt=1.7.4
+[0m14:26:44.236274 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'logs', 'debug': 'False', 'profiles_dir': 'D:/Altera Academy/Tugas/Teknikal/Unit 3/Capstone/capstone-alta-data-main/docker-dep/airflow-dag/dbt-profiles', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m14:26:44.236274 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\Altera Academy\Tugas\Teknikal\Unit 3\Capstone\capstone-alta-data-main\docker-dep\airflow-dag\dbt-profiles\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m14:26:44.251878 [debug] [MainThread]: Command `dbt run` failed at 14:26:44.251878 after 0.14 seconds
+[0m14:26:44.251878 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000238AE079610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000238B5056110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000238B541EB90>]}
+[0m14:26:44.251878 [debug] [MainThread]: Flushing usage events
