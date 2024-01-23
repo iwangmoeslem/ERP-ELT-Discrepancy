@@ -5,24 +5,7 @@ x-logging: &default-logging
     max-size: "100m"
     max-file: "5"
   driver: json-file
-
-# x-airflow-common:
-#   &airflow-common
-#   image: apache/airflow:2.0.0
-#   environment:
-#     - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-#     - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres@postgres:5432/airflow
-#     - AIRFLOW__CORE__FERNET_KEY=FB0o_zt4e3Ziq3LdUUO7F2Z95cvFFx16hU8jTeR1ASM=
-#     - AIRFLOW__CORE__LOAD_EXAMPLES=False
-#     - AIRFLOW__CORE__LOGGING_LEVEL=INFO
-#   volumes:
-#     - ./dags:/opt/airflow/dags
-#     - ./airflow-data/logs:/opt/airflow/logs
-#     - ./airflow-data/plugins:/opt/airflow/plugins
-#     - ./airflow-data/airflow.cfg:/opt/airlfow/airflow.cfg
-#   depends_on:
-#     - postgres
-
+  
 services:
 
   airflow:
@@ -31,7 +14,8 @@ services:
     command: standalone
     environment: 
       - _PIP_ADDITIONAL_REQUIREMENTS=apache-airflow-providers-airbyte==3.5.1 dbt-core==1.7.4 dbt-postgres==1.7.4 cmaker==0.0.6
-
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql://postgres:postgres@host.docker.internal:15432/postgres
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
     volumes:
       - ./airflow-dag:/opt/airflow/dags
     ports:

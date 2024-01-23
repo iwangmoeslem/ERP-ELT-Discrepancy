@@ -19,7 +19,7 @@ WITH daily_sales_comparison AS (
 )
 
 SELECT
-    DATE_TRUNC('day', COALESCE(system_datetime, spreadsheet_datetime)) AS day_bucket,
+    DATE_TRUNC('day', COALESCE(system_datetime::date, spreadsheet_datetime::date)) AS day_bucket,
     SUM(ABS(COALESCE(system_total_transaction, 0) - COALESCE(spreadsheet_total_transaction, 0))) AS total_discrepancy,
     SUM(CASE WHEN system_total_discount <> spreadsheet_total_discount THEN 1 ELSE 0 END) AS inequal_total_discount_discrepancy,
     SUM(CASE WHEN system_total_shipping <> spreadsheet_total_shipping THEN 1 ELSE 0 END) AS inequal_total_shipping_discrepancy,
@@ -28,4 +28,4 @@ SELECT
 FROM
     daily_sales_comparison
 GROUP BY
-    DATE_TRUNC('day', COALESCE(system_datetime, spreadsheet_datetime))
+    DATE_TRUNC('day', COALESCE(system_datetime::date, spreadsheet_datetime::date))

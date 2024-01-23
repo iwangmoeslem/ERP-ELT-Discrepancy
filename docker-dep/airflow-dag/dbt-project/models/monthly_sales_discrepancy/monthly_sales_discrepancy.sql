@@ -18,7 +18,7 @@ WITH monthly_sales_comparison AS (
         e.sales_id = c.sales_id
 )
 SELECT
-    DATE_TRUNC('month', COALESCE(system_datetime, spreadsheet_datetime)) AS month_bucket,
+    DATE_TRUNC('month', COALESCE(system_datetime::date, spreadsheet_datetime::date)) AS month_bucket,
     SUM(ABS(COALESCE(system_total_transaction, 0) - COALESCE(spreadsheet_total_transaction, 0))) AS total_discrepancy,
     SUM(CASE WHEN system_total_discount <> spreadsheet_total_discount THEN 1 ELSE 0 END) AS inequal_total_discount_discrepancy,
     SUM(CASE WHEN system_total_shipping <> spreadsheet_total_shipping THEN 1 ELSE 0 END) AS inequal_total_shipping_discrepancy,
@@ -27,4 +27,4 @@ SELECT
 FROM
     monthly_sales_comparison
 GROUP BY
-    DATE_TRUNC('month', COALESCE(system_datetime, spreadsheet_datetime))
+    DATE_TRUNC('month', COALESCE(system_datetime::date, spreadsheet_datetime::date))

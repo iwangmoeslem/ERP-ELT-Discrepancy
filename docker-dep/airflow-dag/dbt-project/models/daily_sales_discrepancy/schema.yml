@@ -8,6 +8,7 @@ models:
         description: "Bucketed day representing the date of the sales"
         tests:
           - not_null
+          - unique
       - name: total_discrepancy
         description: "Total discrepancy in transaction amounts between ERP and CSV"
         tests:

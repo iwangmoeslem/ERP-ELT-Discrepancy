@@ -1,5 +1,6 @@
-from datetime import datetime, timedelta
 from airflow import DAG
+from airflow.operators.bash import BashOperator
+from datetime import timedelta, datetime
 from airflow.providers.airbyte.operators.airbyte import AirbyteTriggerSyncOperator
 from airflow.operators.dummy_operator import DummyOperator
 
@@ -13,12 +14,25 @@ default_args = {
 }
 
 dag = DAG(
-    'ingest_to_citus',
+    'One-pipline',
     default_args=default_args,
-    description='A DAG to ingest data into Citus using Airbyte',
-    schedule_interval=timedelta(days=1)
-
+    description='Ingest data from sources then run DBT models',
+    schedule_interval=timedelta(days=1),
+    catchup=False
 )
+# task
+dbtmodel = BashOperator(
+    task_id='dbt-run',
+    bash_command=' && '.join([
+            'cd /opt/airflow/dags/dbt-profiles',
+            'export DBT_PROFILES_DIR=$(pwd)',
+            'cd ../dbt-project',
+            # 'dbt test',
+            'dbt run',
+    ]),
+    dag=dag
+)
+
 
 # Define tasks
 ingest_erp = AirbyteTriggerSyncOperator(
@@ -67,5 +81,8 @@ end_task = DummyOperator(
     dag=dag,
 )
 
-# task dependencies
-ingest_erp >> ingest_sales_csv >> ingest_product_csv >> ingest_sales_item_csv >> end_task
+
+ingest_erp >> dbtmodel
+ingest_sales_csv >> dbtmodel
+ingest_product_csv >> dbtmodel
+ingest_sales_item_csv >> dbtmodel >> end_task
